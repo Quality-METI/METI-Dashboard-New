@@ -73,3 +73,4 @@ Home, Details of Data, Top Labelers, Top QTC, QTC Stats، و Admin > Attendance 
 - Timezone: Africa/Cairo
 
 حافظ على الموقع القديم والـ Repository القديم دون أي تعديل.
+Trigger GitHub Pages rebuild
