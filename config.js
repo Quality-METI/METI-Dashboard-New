@@ -1,7 +1,7 @@
+
 /* METI Dashboard frontend configuration.
- * Paste the NEW Dashboard Apps Script Web App /exec URL after backend deployment.
- * Never put Supabase keys, service-role keys, passwords, or private tokens here.
+ * Production Apps Script backend.
  */
 window.METI_CONFIG = {
-  APPS_SCRIPT_URL: ""
+  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbxyJkCpvpRtYDXAD4xT8Ga71uTHI0lSKp8OM7oQwC9Wg-DDRwO2Ye7BPY9uzBAEXiLu/exec"
 };
