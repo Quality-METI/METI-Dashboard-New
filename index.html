@@ -2113,17 +2113,26 @@ function renderWeekTarget(){var el=gid('homeTargetArea');if(!el)return;var weeks
 
 <script>
 // ══ DATA PAGE ══
+var _dataRequestSeq = 0;
 function loadData(){
+  var requestSeq = ++_dataRequestSeq;
   var from=getFilterISO(true),to=getFilterISO(false);
-  shtml('dataArea','<div class="loading"><div class="spin"></div></div>');
+  shtml('dataArea','<div class="loading"><div class="spin"></div> Loading tasks...</div>');
   google.script.run
     .withSuccessHandler(function(r){
-      if(r.err){shtml('dataArea','<div class="empty">'+r.err+'</div>');return;}
+      if (requestSeq !== _dataRequestSeq) return;
+      if(!r || r.err || !Array.isArray(r.data)){
+        shtml('dataArea','<div class="empty">'+esc((r && r.err) || 'Invalid response from Dashboard API.')+'</div>');
+        return;
+      }
       r.data.sort(function(a,b){return new Date(b[F.date]||0)-new Date(a[F.date]||0);});
-     dataAll=r.data;dataPage=1;renderDataFiltered();
-if(gid('pgDetailsOfData')&&gid('pgDetailsOfData').style.display!=='none')renderDetailsOfData();
+      dataAll=r.data;dataPage=1;renderDataFiltered();
+      if(gid('pgDetailsOfData')&&gid('pgDetailsOfData').style.display!=='none')renderDetailsOfData();
     })
-    .withFailureHandler(function(e){shtml('dataArea','<div class="empty">'+e.message+'</div>');})
+    .withFailureHandler(function(e){
+      if (requestSeq !== _dataRequestSeq) return;
+      shtml('dataArea','<div class="empty">'+esc((e && e.message) || 'Unable to load task records.')+'</div>');
+    })
     .getStats(TOKEN,from,to);
 }
 
@@ -2265,20 +2274,31 @@ function closeDetail(){gid('detailBd').classList.remove('show');}
 
 <script>
 // ══ LABELERS PAGE ══
+var _labelersRequestSeq = 0;
 function loadLabelers(){
+  var requestSeq = ++_labelersRequestSeq;
   var from = getFilterISO(true), to = getFilterISO(false);
   shtml('labelersArea', '<div class="loading"><div class="spin"></div> Loading Labeler Leaderboard...</div>');
-  
+
+  // GitHub Pages uses the fetch-based google.script.run bridge above.
   google.script.run
     .withSuccessHandler(function(r){
-      if(r.err){shtml('labelersArea','<div class="empty">'+r.err+'</div>');return;}
-      // تم إلغاء أي فلترة هنا عشان الجدول يظهر كامل لكل الرتب
+      if (requestSeq !== _labelersRequestSeq) return; // Ignore stale filter responses.
+      if (!r || r.err || !Array.isArray(r.data)) {
+        shtml('labelersArea','<div class="empty">'+esc((r && r.err) || 'Invalid response from Dashboard API.')+'</div>');
+        return;
+      }
+      if (!r.data.length) {
+        shtml('labelersArea','<div class="empty">No labeler records found for the selected date range.</div>');
+        return;
+      }
       renderLabelersPage(r.data);
     })
     .withFailureHandler(function(e){
-      shtml('labelersArea','<div class="empty">'+e.message+'</div>');
+      if (requestSeq !== _labelersRequestSeq) return;
+      shtml('labelersArea','<div class="empty">'+esc((e && e.message) || 'Unable to load labeler data.')+'</div>');
     })
-    .getStats(TOKEN, from, to); // التأكد من استخدام getStats للجميع
+    .getStats(TOKEN, from, to);
 }
 
 function renderLabelersPage(data){
