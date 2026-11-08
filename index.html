@@ -618,6 +618,89 @@ body.dark .pc-box{background:#2a2b2e;color:#e8eaed}body.dark .pc-no{background:#
 @media(max-width:380px){
   #pgWla .wla-stat{flex:1 1 100%}
 }
+
+
+/* ══════════════════════════════════════════════════════════════
+   METI AURORA TEAL THEME — visual-only override
+   Layout, components, JavaScript, APIs, permissions and data logic unchanged.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --blue:#155E63;--blue-mid:#0F8B8D;--blue-lt:#B7E4E5;--blue-bg:#E7F6F6;
+  --bg:#F2F8F8;--white:#FFFFFF;--dark:#142B35;--gray:#58717A;--gray-lt:#E8F1F2;
+  --border:#D5E4E6;--shadow:0 3px 14px rgba(12,55,68,.09);
+  --info-bg:#DDF5F4;--info-text:#087E83;
+  --surface-2:#F5FAFA;--surface-3:#EDF5F5;--row-sep:#E7EFF0;
+  --row-hover:#E3F5F4;
+}
+body{background:var(--bg);color:var(--dark)}
+body::before{background:radial-gradient(ellipse at 50% 35%,#DDF5F4 0%,transparent 72%);opacity:.42}
+.sidebar,.bottom-nav{background:#102B35}
+.topbar{background:#FFFFFF}
+.tb-left .tb-title,.sec-hdr,.global-filter-bar label{color:#155E63}
+.sec-hdr::after{background:#B7E4E5}
+.login-screen{background:linear-gradient(135deg,#0C1920 0%,#142B35 52%,#155E63 100%)}
+.login-logo .logo-badge{background:#DDF5F4}
+.login-logo h1{color:#155E63}
+.login-btn,.fbtn-primary{background:#087E83}
+.login-btn:hover,.fbtn-primary:hover{background:#06666B}
+.mod-btn:hover,.fb-time:focus,.inp-wrap input:focus,.inp-wrap select:focus,.pwd-wrap input:focus,.sel-inp:focus{border-color:#0F8B8D}
+.card.card-active{box-shadow:0 0 0 3px #0F8B8D,0 6px 20px rgba(8,126,131,.16)!important}
+thead tr{background:#155E63}
+tr.total-row td,tr.total-row:hover td{background:#155E63!important}
+tbody tr:hover td,tr.clickable:hover td,tr.data-row:hover td{background:#E3F5F4!important}
+tr.row-active td{background:#D5EEEE!important;color:#155E63!important}
+.shift-banner{background:#E7F6F6;border-color:#B7E4E5;color:#155E63}
+.bottom-nav{box-shadow:0 -2px 16px rgba(12,55,68,.2)}
+.config-notice{background:var(--warn-text)}
+
+/* Dark appearance keeps the existing toggle and saved preference intact. */
+body.dark{
+  --bg:#0C1920;--white:#142B35;--dark:#EAF7F7;--gray:#A5C8D0;--gray-lt:#1B3540;--border:#294651;
+  --blue:#14B8A6;--blue-mid:#0F8B8D;--blue-lt:#24515A;--blue-bg:#17343B;
+  --shadow:0 3px 16px rgba(0,0,0,.28);
+  --info-bg:#123B40;--info-text:#67E8F9;
+  --surface-2:#18323C;--surface-3:#1B3540;--row-sep:#294651;--row-hover:#17343B;
+  --ok-bg:#153B30;--ok-text:#86E0B5;
+  --warn-bg:#42351B;--warn-text:#F6C66A;
+  --danger-bg:#482629;--danger-text:#FF9B9B;
+  --accent-bg:#302545;--accent-text:#D7A8F2;
+  --neutral-bg:#1B3540;--neutral-text:#A5C8D0;--empty-text:#78949C;
+  --gold-bg:#403719;--gold-text:#F5D477;
+  --indigo-bg:#202D4B;--indigo-text:#A9BDFB;
+  --morning-bg:#42301B;--morning-text:#FFC078;
+  --overnight-bg:#153B30;--overnight-text:#86E0B5;
+  --present-bg:#153B30;--absent-bg:#482629;--train-bg:#42351B;--pt-bg:#302545;
+}
+body.dark .sidebar,body.dark .bottom-nav{background:#081820}
+body.dark .topbar,body.dark .filter-bar,body.dark .card,body.dark .tbl-card,body.dark .modal,body.dark .target-card,body.dark .card-drill,body.dark .pagination{background:#142B35;border-color:#294651}
+body.dark .content,body.dark .main{background:#0C1920}
+body.dark td,body.dark .detail-val{color:#EAF7F7}
+body.dark tbody tr:nth-child(even) td{background:#18323C}
+body.dark tbody tr:hover td,body.dark tr.clickable:hover td,body.dark tbody tr.data-row:hover td{background:#17343B!important}
+body.dark tr.total-row td,body.dark tr.total-row:hover td{background:#155E63!important;color:#fff!important}
+body.dark tr.row-active td{background:#1C4148!important;color:#B7F2E6!important}
+body.dark input,body.dark select,body.dark .dp-input,body.dark .fb-time,body.dark .sel-inp{background:#18323C!important;color:#EAF7F7!important;border-color:#294651!important}
+body.dark .mod-btn,body.dark .lab-sort-pill,body.dark .drill-shift-btn,body.dark .pg-btn{background:#18323C;color:#A5C8D0;border-color:#294651}
+body.dark .mod-btn:hover,body.dark .lab-sort-pill:hover,body.dark .pg-btn:hover:not(:disabled){border-color:#14B8A6;color:#67E8F9}
+body.dark .drill-unit-row,body.dark .shift-banner{background:#17343B;border-color:#24515A;color:#9DE8E0}
+body.dark .sec-hdr{color:#67E8F9}body.dark .sec-hdr::after{background:#24515A}
+body.dark .dp-popup{background:#142B35;border-color:#294651}
+body.dark .dp-nav-btn,body.dark .dp-month-label,body.dark .dp-day.today{color:#67E8F9}
+body.dark .dp-day{color:#EAF7F7}body.dark .dp-day:hover{background:#18323C;color:#67E8F9}
+body.dark .dp-day.selected,body.dark .dp-ym-item.selected{background:#087E83;color:#fff}
+body.dark .dp-ym-item{color:#EAF7F7}body.dark .dp-ym-item:hover{background:#18323C;color:#67E8F9}
+body.dark .modal-close,body.dark .fbtn-ghost{background:#18323C;color:#A5C8D0}
+body.dark .ib-edit{background:#17343B;color:#67E8F9}
+body.dark .add-btn{background:#087E83}
+body.dark #dataStatsBar{background:#142B35!important;border-color:#294651!important}
+body.dark #dataStatsBar span{color:#A5C8D0!important}
+body.dark #dataArea tr.data-row.has-link:hover td{background:#153B30!important}
+body.dark #dodArea table thead tr{background:#155E63!important}
+body.dark #dodArea table tbody tr:not([style*="background"]){background:#142B35!important}
+body.dark #dodArea table tbody tr:nth-child(even):not([style*="background"]){background:#18323C!important}
+body.dark #dodArea .card-drill{background:#142B35!important;border-color:#294651!important}
+body.dark #attDetailsArea [style*="border-bottom:1px solid"]{border-color:#294651!important}
+
 </style>
 </head>
 <body>
