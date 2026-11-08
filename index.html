@@ -5183,166 +5183,106 @@ switchUserTab = function(tab){
 
 console.log('✅ METI Permissions Patch v2 Loaded');
 
-// ── زرار "📥 Export" جنب Not Submitted: كان ظاهر بس مش متوصّل بأي حاجة.
-// دلوقتي بيعمل Google Sheet جديد فعليًا عن طريق createNotSubmittedSheet في الباك إند ──
+// ── Direct TXT export helper: downloads a UTF-8 tab-separated text file.
+// No ZIP archive and no Google Drive/Sheets file creation.
+function downloadMETITXT(fileName, headers, rows) {
+  function cell(v) {
+    var value = (v === null || v === undefined) ? '' : String(v);
+    return value.replace(/[\t\r\n]+/g, ' ').trim();
+  }
+  var txt = '\uFEFF' + [headers].concat(rows || []).map(function(row) {
+    return row.map(cell).join('\t');
+  }).join('\r\n');
+  var blob = new Blob([txt], {type: 'text/plain;charset=utf-8'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  var safeName = fileName.replace(/[\\/:*?"<>|]/g, '_');
+  a.href = url;
+  a.download = safeName + '.txt';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(function() { URL.revokeObjectURL(url); }, 2000);
+}
+
+// ── Not Submitted export: download a TXT file directly; no Google Sheet creation.
 (function() {
   var area = gid('dodArea');
   if (!area) return;
   area.addEventListener('click', function(e) {
     var btn = e.target.closest('.ns-export-btn');
     if (!btn) return;
-    e.stopPropagation(); // منع فتح/قفل الـ accordion اللي الزرار جواه
+    e.stopPropagation();
 
     var people, unit, shift;
     try {
       people = JSON.parse(decodeURIComponent(btn.getAttribute('data-people')) || '[]');
-      unit   = decodeURIComponent(btn.getAttribute('data-unit') || '');
-      shift  = decodeURIComponent(btn.getAttribute('data-shift') || '');
+      unit = decodeURIComponent(btn.getAttribute('data-unit') || '');
+      shift = decodeURIComponent(btn.getAttribute('data-shift') || '');
     } catch (err) { toast('Export data error', 'err'); return; }
-
     if (!people.length) { toast('No employees to export', 'err'); return; }
 
-var rows = people.map(function(p) {
-      var name  = titleCase(p.name || '-');
-      var pc    = (p.pc || '-').toString().split('-').pop();
-      var ub    = fmtUbkey(p.yubikey || '');
-      var tl    = titleCase(p.tl || '-');
-      var queue = (p.taskAssigned || '-').toString();
-      return [name, pc, ub, unit, shift, tl, queue];
+    var rows = people.map(function(p) {
+      return [titleCase(p.name || '-'), (p.pc || '-').toString().split('-').pop(),
+        fmtUbkey(p.yubikey || ''), unit, shift, titleCase(p.tl || '-'),
+        (p.taskAssigned || '-').toString()];
     });
-
-    var origText = btn.innerHTML;
-    btn.innerHTML = '⏳ Creating...';
-    btn.disabled = true;
-    btn.style.opacity = '0.75';
-
-    // ── نفتح تاب فاضي دلوقتي (جوه الـ click مباشرة) عشان المتصفح
-    // يعتبره نتيجة ضغطة يوزر ومايحظروش كـ popup ──
-    var exportWin = window.open('', '_blank');
-    if (exportWin) { try { exportWin.document.write('جاري تجهيز الشيت...'); } catch (e) {} }
-
-    // ── مهلة أمان: لو الطلب طوّل أكتر من 20 ثانية، رجّع الزرار لحالته
-    // وقول لليوزر إنه ممكن يحاول تاني، بدل ما يفضل معلّق "Creating..." للأبد ──
-    var settled = false;
-    var timeoutId = setTimeout(function() {
-      if (settled) return;
-      settled = true;
-      btn.innerHTML = origText;
-      btn.disabled = false;
-      btn.style.opacity = '1';
-      toast('الطلب طوّل قوي، حاول تاني ⏱️', 'err');
-      if (exportWin) { try { exportWin.close(); } catch (e) {} }
-    }, 20000);
-
-    function resetBtn() {
-      btn.innerHTML = origText;
-      btn.disabled = false;
-      btn.style.opacity = '1';
-    }
-
-    google.script.run
-      .withSuccessHandler(function(r) {
-        if (settled) return;
-        settled = true;
-        clearTimeout(timeoutId);
-        resetBtn();
-        if (!r || r.err) {
-          toast(r && r.err ? r.err : 'Export failed', 'err');
-          if (exportWin) { try { exportWin.close(); } catch (e) {} }
-          return;
-        }
-        if (r.warn) { toast(r.warn, 'err'); } else { toast('Sheet created ✅', 'ok'); }
-        if (exportWin) { exportWin.location = r.url; } else { window.open(r.url, '_blank'); }
-      })
-      .withFailureHandler(function(err) {
-        if (settled) return;
-        settled = true;
-        clearTimeout(timeoutId);
-        resetBtn();
-        toast(err && err.message ? err.message : 'Export failed', 'err');
-        if (exportWin) { try { exportWin.close(); } catch (e) {} }
-      })
-      .createNotSubmittedSheet(TOKEN, rows, unit, shift);
+    var dateStr = todayISO();
+    downloadMETITXT('Not Submitted - ' + unit + ' - ' + shift + ' - ' + dateStr,
+      ['Employee Name','PC Number','Yubikey Email','Unit','Shift','TL/QTC','Queue'], rows);
+    toast('TXT file downloaded ✅', 'ok');
   });
 })();
 
-// ── زرار "📥 Export Attendance" البرتقالي في صفحة Details of Attendance:
-// بيجيب كل الحاضرين والغايبين لكل الشيفتات في التاريخ المختار (مش بس اللي متفلتر
-// أو الكروت المفتوحة قدامك)، وبيعمل بيهم Google Sheet جديد ──
+// ── Attendance export: fetch attendance data, then download TXT locally.
 (function() {
   var btn = gid('btnExportAttendance');
   if (!btn) return;
-
   btn.addEventListener('click', function() {
     var dateISO = DP.getVal('attDate2') || todayISO();
-
     var origText = btn.innerHTML;
     btn.innerHTML = '⏳ Loading...';
     btn.disabled = true;
     btn.style.opacity = '0.75';
-
     var settled = false;
     var timeoutId = setTimeout(function() {
       if (settled) return;
-      settled = true;
-      resetBtn();
+      settled = true; resetBtn();
       toast('الطلب طوّل قوي، حاول تاني ⏱️', 'err');
     }, 20000);
-
     function resetBtn() {
       btn.innerHTML = origText;
       btn.disabled = false;
       btn.style.opacity = '1';
     }
-
-    // بنجيب الداتا بـ shift=null عمدًا عشان نضمن رجوع كل الشيفتات مع بعض،
-    // بغض النظر عن فلتر الشيفت الحالي في الصفحة أو أي كروت مقفولة
     google.script.run
       .withSuccessHandler(function(r) {
         if (settled) return;
+        settled = true; clearTimeout(timeoutId); resetBtn();
         if (!r || r.err) {
-          settled = true; clearTimeout(timeoutId); resetBtn();
           toast(r && r.err ? r.err : 'Failed to load attendance data', 'err');
           return;
         }
-
-        var shifts = r.shifts || {};
         var rows = [];
+        var shifts = r.shifts || {};
         Object.keys(shifts).forEach(function(sh) {
           var sd = shifts[sh] || {};
-          var present = sd.present || [], absent = sd.absent || [];
-          present.forEach(function(p) {
-            var rawSt = (p.type || p.status || '').toString().trim().toUpperCase();
-            rows.push([titleCase(p.name || '-'), (p.pc || '-'), (p.location || '-'), sh, rawSt || 'Present', fmtUbkey(p.yubikey || '')]);
+          (sd.present || []).forEach(function(p) {
+            var status = (p.type || p.status || '').toString().trim().toUpperCase();
+            rows.push([titleCase(p.name || '-'), p.pc || '-', p.location || '-', sh,
+              status || 'Present', fmtUbkey(p.yubikey || '')]);
           });
-          absent.forEach(function(p) {
-            rows.push([titleCase(p.name || '-'), (p.pc || '-'), (p.location || '-'), sh, 'Absent', fmtUbkey(p.yubikey || '')]);
+          (sd.absent || []).forEach(function(p) {
+            rows.push([titleCase(p.name || '-'), p.pc || '-', p.location || '-', sh,
+              'Absent', fmtUbkey(p.yubikey || '')]);
           });
         });
-
-        if (!rows.length) {
-          settled = true; clearTimeout(timeoutId); resetBtn();
-          toast('No attendance data for this date', 'err');
-          return;
-        }
-
-        var dp = dateISO.split('-'); // yyyy-mm-dd -> dd-MM-yyyy
+        if (!rows.length) { toast('No attendance data for this date', 'err'); return; }
+        var dp = dateISO.split('-');
         var dateStr = dp[2] + '-' + dp[1] + '-' + dp[0];
-
-        btn.innerHTML = '⏳ Creating...';
-
-        google.script.run
-          .withSuccessHandler(function(r2) {
-            settled = true; clearTimeout(timeoutId); resetBtn();
-            if (!r2 || r2.err) { toast(r2 && r2.err ? r2.err : 'Export failed', 'err'); return; }
-            if (r2.warn) { toast(r2.warn, 'err'); } else { toast('Sheet created ✅', 'ok'); }
-            window.open(r2.url, '_blank');
-          })
-          .withFailureHandler(function(err) {
-            settled = true; clearTimeout(timeoutId); resetBtn();
-            toast(err && err.message ? err.message : 'Export failed', 'err');
-          })
-          .createAttendanceExportSheet(TOKEN, rows, dateStr);
+        downloadMETITXT('Attendance - ' + dateStr,
+          ['Employee Name','PC Number','Unit','Shift','Status','Yubikey Email'], rows);
+        toast('TXT file downloaded ✅', 'ok');
       })
       .withFailureHandler(function(err) {
         if (settled) return;
