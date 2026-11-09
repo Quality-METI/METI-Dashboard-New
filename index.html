@@ -701,6 +701,80 @@ body.dark #dodArea table tbody tr:nth-child(even):not([style*="background"]){bac
 body.dark #dodArea .card-drill{background:#142B35!important;border-color:#294651!important}
 body.dark #attDetailsArea [style*="border-bottom:1px solid"]{border-color:#294651!important}
 
+
+/* ══ METI CREATIVE LOGIN — AURORA MISSION CONTROL ══ */
+#loginScreen{min-height:100vh;background:#0C1920;color:#EAF7F7}
+#loginScreen .login-screen-full{min-height:100vh;width:100%;padding:clamp(24px,5vw,76px);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;isolation:isolate;background:radial-gradient(ellipse at 14% 18%,rgba(20,184,166,.22),transparent 34%),radial-gradient(ellipse at 85% 82%,rgba(103,232,249,.12),transparent 32%),linear-gradient(128deg,#09171D 0%,#0C2028 48%,#10383A 100%);font-family:var(--font)}
+#loginScreen .login-screen-full:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.22;background-image:linear-gradient(rgba(103,232,249,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(103,232,249,.07) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse at 50% 50%,#000 0%,transparent 78%)}
+#loginScreen .login-screen-full:after{content:"METI  /  OPERATIONS INTELLIGENCE";position:absolute;left:clamp(24px,5vw,76px);bottom:24px;color:rgba(158,213,214,.35);font:600 9px var(--mono);letter-spacing:2.4px;z-index:1}
+#loginScreen .login-grid-pattern{display:none}
+#loginScreen .login-aurora-orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(1px);z-index:-1}
+#loginScreen .login-orb-one{width:min(55vw,720px);height:min(55vw,720px);right:-15%;top:-30%;opacity:.52;background:conic-gradient(from 210deg,transparent 0 18%,rgba(20,184,166,.13) 25%,rgba(103,232,249,.08) 34%,transparent 48% 70%,rgba(20,184,166,.12) 82%,transparent 92%);border:1px solid rgba(103,232,249,.12);box-shadow:inset 0 0 90px rgba(20,184,166,.06);animation:metiOrbit 34s linear infinite}
+#loginScreen .login-orb-two{width:390px;height:390px;left:-210px;bottom:-220px;opacity:.7;background:radial-gradient(circle,rgba(20,184,166,.22),transparent 68%)}
+@keyframes metiOrbit{to{transform:rotate(360deg)}}
+#loginScreen .login-portal{width:min(1380px,100%);min-height:min(790px,calc(100vh - 70px));display:grid;grid-template-columns:minmax(0,1.12fr) minmax(390px,.78fr);gap:clamp(30px,7vw,110px);align-items:center;position:relative;z-index:2;border:0;border-radius:0;overflow:visible;background:transparent;box-shadow:none;backdrop-filter:none}
+#loginScreen .login-showcase{padding:clamp(10px,2vw,28px) 0;display:flex;flex-direction:column;justify-content:space-between;min-height:680px;background:transparent;border:0;position:relative;overflow:visible}
+#loginScreen .login-showcase:before{content:"";position:absolute;width:min(42vw,560px);aspect-ratio:1;left:8%;top:17%;border-radius:50%;border:1px solid rgba(103,232,249,.14);box-shadow:0 0 0 34px rgba(103,232,249,.018),0 0 0 72px rgba(103,232,249,.014),inset 0 0 90px rgba(20,184,166,.05);pointer-events:none}
+#loginScreen .login-showcase:after{content:"";position:absolute;width:12px;height:12px;left:calc(8% + min(42vw,560px)*.77);top:calc(17% + min(42vw,560px)*.17);border-radius:50%;background:#67E8F9;box-shadow:0 0 14px 5px rgba(103,232,249,.35),0 0 50px rgba(20,184,166,.55);pointer-events:none}
+#loginScreen .portal-brand{display:flex;align-items:center;gap:15px;position:relative;z-index:1}
+#loginScreen .portal-mark{width:58px;height:58px;border-radius:19px;background:linear-gradient(145deg,rgba(103,232,249,.19),rgba(20,184,166,.08));border:1px solid rgba(103,232,249,.35);display:grid;place-items:center;box-shadow:0 0 36px rgba(20,184,166,.12),inset 0 1px rgba(255,255,255,.12)}
+#loginScreen .portal-mark svg{width:46px;height:46px;filter:drop-shadow(0 0 7px rgba(103,232,249,.28))}
+#loginScreen .portal-brand strong{display:block;color:#efffff;font-size:25px;font-weight:800;letter-spacing:3px;line-height:1.1}
+#loginScreen .portal-brand span{display:block;color:#7ba9b0;font-size:9px;font-weight:700;letter-spacing:2.5px;margin-top:6px}
+#loginScreen .showcase-copy{max-width:660px;margin:70px 0 46px;position:relative;z-index:1}
+#loginScreen .showcase-eyebrow{display:inline-flex;align-items:center;gap:10px;color:#7CE9E1;font-size:10px;font-weight:800;letter-spacing:2px;margin-bottom:25px;padding:9px 13px;border:1px solid rgba(103,232,249,.18);border-radius:30px;background:rgba(103,232,249,.045)}
+#loginScreen .showcase-eyebrow span{width:7px;height:7px;border-radius:50%;background:#36DCC8;box-shadow:0 0 14px #14B8A6}
+#loginScreen .showcase-copy h1{font-size:clamp(42px,5.5vw,76px);line-height:1.01;letter-spacing:-3.4px;color:#F0FCFC;font-weight:800;text-wrap:balance}
+#loginScreen .showcase-copy h1 em{font-style:normal;display:inline-block;background:linear-gradient(95deg,#6DE9E0 5%,#67E8F9 55%,#B3F8F1 100%);background-clip:text;-webkit-background-clip:text;color:transparent}
+#loginScreen .showcase-copy p{max-width:460px;color:#9BBCC2;font-size:15px;line-height:1.85;margin-top:24px}
+#loginScreen .showcase-feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:660px;position:relative;z-index:1}
+#loginScreen .showcase-feature{min-height:108px;padding:17px 15px;border:1px solid rgba(148,220,225,.13);border-radius:17px;background:linear-gradient(145deg,rgba(26,62,70,.48),rgba(12,34,42,.24));backdrop-filter:blur(12px);box-shadow:inset 0 1px rgba(255,255,255,.035)}
+#loginScreen .feature-icon{display:block;color:#67E8F9;font-size:23px;margin-bottom:13px;text-shadow:0 0 16px rgba(103,232,249,.4)}
+#loginScreen .showcase-feature b{display:block;color:#E5FAFA;font-size:11px;letter-spacing:.2px}
+#loginScreen .showcase-feature small{display:block;color:#85AAB1;font-size:10px;margin-top:6px;line-height:1.4}
+#loginScreen .showcase-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:32px;max-width:660px;position:relative;z-index:1}
+#loginScreen .system-status{display:flex;align-items:center;gap:9px;color:#A9D5D5;font-size:11px;font-weight:700}
+#loginScreen .status-pulse{width:7px;height:7px;border-radius:50%;background:#36D399;box-shadow:0 0 0 5px rgba(54,211,153,.1),0 0 14px rgba(54,211,153,.6)}
+#loginScreen .showcase-caption{color:#678E96;font-size:10px}
+#loginScreen .login-panel{padding:clamp(30px,3.8vw,54px);display:flex;flex-direction:column;justify-content:center;background:linear-gradient(155deg,rgba(23,53,62,.91),rgba(10,28,36,.94));min-width:0;border:1px solid rgba(146,222,225,.2);border-radius:26px;box-shadow:0 32px 90px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.07);backdrop-filter:blur(24px);position:relative;overflow:hidden}
+#loginScreen .login-panel:before{content:"";position:absolute;top:0;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(103,232,249,.7),transparent)}
+#loginScreen .login-panel-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px}
+#loginScreen .mobile-brand-mark{display:none}
+#loginScreen .secure-label{display:inline-flex;align-items:center;gap:7px;color:#8CB9BF;font-size:9px;font-weight:800;letter-spacing:1.3px}
+#loginScreen .secure-label svg{width:18px;height:18px;color:#46CFC0}
+#loginScreen .login-heading{margin-bottom:32px}
+#loginScreen .login-kicker{font-size:10px;letter-spacing:2.2px;font-weight:800;color:#36CABB;margin-bottom:13px}
+#loginScreen .login-heading h2{font-size:clamp(29px,3vw,38px);font-weight:800;letter-spacing:-1.3px;color:#EFFBFB}
+#loginScreen .login-heading p{color:#8EABB2;font-size:13px;line-height:1.75;margin-top:11px}
+#loginScreen .login-field{margin-bottom:21px}
+#loginScreen .login-field label{color:#B4D2D6;font-size:10px;letter-spacing:1px;margin-bottom:9px}
+#loginScreen .login-input-shell{height:56px;display:flex;align-items:center;gap:12px;padding:0 15px;border:1px solid rgba(133,190,197,.22);border-radius:13px;background:rgba(8,25,32,.55);transition:border-color .2s,box-shadow .2s,background .2s}
+#loginScreen .login-input-shell:focus-within{border-color:#14B8A6;box-shadow:0 0 0 4px rgba(20,184,166,.12),0 0 24px rgba(20,184,166,.08);background:rgba(12,43,49,.88)}
+#loginScreen .login-input-shell>svg{width:19px;height:19px;flex:0 0 19px;fill:none;stroke:#78A9B1;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+#loginScreen .login-input-shell input{height:100%;min-width:0;flex:1;padding:0;border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;color:#E9FAFA!important;font-size:14px}
+#loginScreen .login-input-shell input::placeholder{color:#668991}
+#loginScreen .login-input-shell .eye-btn{position:static;flex:0 0 30px;width:30px;height:40px;color:#83AEB5;border-radius:7px}
+#loginScreen .login-input-shell .eye-btn:hover{color:#67E8F9;background:rgba(103,232,249,.08)}
+#loginScreen .login-btn{display:flex;align-items:center;justify-content:center;gap:12px;height:56px;margin-top:9px;padding:0 20px;border-radius:13px;background:linear-gradient(105deg,#087E83,#14B8A6 62%,#39CFC0);box-shadow:0 12px 30px rgba(20,184,166,.22);font-size:14px;letter-spacing:.3px;transition:transform .18s,box-shadow .18s}
+#loginScreen .login-btn:hover{background:linear-gradient(105deg,#087E83,#19C7B4 62%,#58DED1);box-shadow:0 15px 36px rgba(20,184,166,.3);transform:translateY(-1px)}
+#loginScreen .login-btn-arrow{font-size:20px;line-height:1;transition:transform .2s}
+#loginScreen .login-btn:hover .login-btn-arrow{transform:translateX(4px)}
+#loginScreen .login-divider{display:flex;align-items:center;gap:13px;color:#668991;font-size:9px;font-weight:800;letter-spacing:1.5px;margin:23px 0 17px}
+#loginScreen .login-divider:before,#loginScreen .login-divider:after{content:"";height:1px;flex:1;background:rgba(133,190,197,.16)}
+#loginScreen .demo-login-btn{width:100%;height:51px;border:1px solid rgba(103,232,249,.25);border-radius:13px;background:rgba(103,232,249,.045);color:#9BDDE0;font-size:12px;font-weight:700;cursor:pointer;transition:all .18s}
+#loginScreen .demo-login-btn:hover{border-color:rgba(103,232,249,.55);background:rgba(103,232,249,.09);color:#D8FFFF}
+#loginScreen .demo-icon{font-size:16px;margin-right:8px;color:#67E8F9}
+#loginScreen .login-register-line{display:flex;justify-content:center;align-items:center;gap:5px;margin-top:25px;color:#819FA6;font-size:12px}
+#loginScreen .login-register-line button{border:0;background:none;color:#55D6CA;font-weight:700;font-size:12px;cursor:pointer;padding:5px}
+#loginScreen .login-register-line button:hover{text-decoration:underline}
+#loginScreen .login-panel-footer{display:flex;justify-content:space-between;gap:12px;border-top:1px solid rgba(133,190,197,.12);padding-top:17px;margin-top:36px;color:#5F828A;font-size:9px}
+#loginScreen .login-copyright{display:none}
+#loginScreen .login-err{background:rgba(239,68,68,.12);color:#FFAAA8;border:1px solid rgba(248,113,113,.24);margin:0 0 14px;padding:11px 13px;border-radius:10px}
+@media(max-width:1000px){#loginScreen .login-screen-full{padding:28px}#loginScreen .login-portal{grid-template-columns:minmax(0,1fr) minmax(350px,.8fr);gap:30px}#loginScreen .login-showcase{min-height:620px}#loginScreen .showcase-copy h1{font-size:clamp(38px,5vw,58px)}#loginScreen .showcase-feature-grid{grid-template-columns:1fr;max-width:300px}#loginScreen .showcase-feature{min-height:0;padding:12px 14px;display:flex;align-items:center;gap:12px}#loginScreen .feature-icon{margin:0}#loginScreen .showcase-feature small{margin-top:3px}}
+@media(max-width:760px){#loginScreen .login-screen-full{padding:22px;min-height:100svh}#loginScreen .login-portal{grid-template-columns:1fr;max-width:520px;min-height:0;gap:0}#loginScreen .login-showcase{display:none}#loginScreen .login-panel{padding:38px clamp(24px,7vw,52px);min-height:650px}#loginScreen .login-panel-top{margin-bottom:40px}#loginScreen .mobile-brand-mark{display:block;width:52px;height:52px;padding:7px;border-radius:16px;background:rgba(20,184,166,.12);border:1px solid rgba(20,184,166,.25)}#loginScreen .mobile-brand-mark svg{width:100%;height:100%}#loginScreen .login-screen-full:after{display:none}}
+@media(max-width:480px){#loginScreen .login-screen-full{padding:12px}#loginScreen .login-panel{padding:28px 22px;min-height:620px;border-radius:22px}#loginScreen .login-panel-top{margin-bottom:34px}#loginScreen .login-heading{margin-bottom:27px}#loginScreen .login-panel-footer{flex-direction:column;align-items:center;margin-top:30px}}
+@media(prefers-reduced-motion:reduce){#loginScreen .login-orb-one{animation:none!important}#loginScreen .login-btn,#loginScreen .login-input-shell{transition:none!important}}
+
 </style>
 </head>
 <body>
@@ -788,43 +862,82 @@ body.dark #attDetailsArea [style*="border-bottom:1px solid"]{border-color:#29465
   </div>
 </div>
 <div id="loginScreen">
-  <div class="login-screen">
-    <div class="login-box">
-      <div class="login-logo">
-        <div class="logo-badge">
-          <svg width="50" height="50" viewBox="0 0 80 80"><text x="50%" y="56" font-family="IBM Plex Sans,Arial" font-weight="900" font-size="32" fill="#1c4587" letter-spacing="-1" text-anchor="middle">ME</text></svg>
-        </div>
-        <h1>METI Dashboard</h1>
-        <div style="display:flex;justify-content:center;margin-top:8px;margin-bottom:2px">
-          <div id="loginNetStatus" style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;background:#d4edda;color:var(--ok-text);border:1.5px solid var(--ok-text)">
-            <span id="loginNetDot" style="width:7px;height:7px;border-radius:50%;background:var(--ok-text);display:inline-block"></span>
-            <span id="loginNetLabel">Online</span>
+  <div class="login-screen login-screen-full">
+    <div class="login-aurora-orb login-orb-one"></div>
+    <div class="login-aurora-orb login-orb-two"></div>
+    <div class="login-grid-pattern"></div>
+    <div class="login-portal">
+      <section class="login-showcase">
+        <div class="portal-brand">
+          <div class="portal-mark" aria-label="METI logo">
+            <svg viewBox="0 0 64 64" role="img" aria-hidden="true">
+              <defs><linearGradient id="metiMarkGradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#67E8F9"/><stop offset="1" stop-color="#14B8A6"/></linearGradient></defs>
+              <path d="M10 46V18l14 17 8-10 8 10 14-17v28" fill="none" stroke="url(#metiMarkGradient)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="10" cy="18" r="4" fill="#67E8F9"/><circle cx="54" cy="18" r="4" fill="#14B8A6"/>
+            </svg>
           </div>
+          <div><strong>METI</strong><span>OPERATIONS PLATFORM</span></div>
         </div>
-        <p>Data Labeling Operations Center</p>
-      </div>
-      <div id="loginForm">
-        <div class="inp-wrap"><label>Name or Email</label><input type="text" id="lEmail" autocomplete="username" placeholder="Enter name or email"></div>
-        <div class="inp-wrap"><label>Password</label>
-          <div class="pwd-wrap">
-            <input type="password" id="lPass" autocomplete="current-password" placeholder="Enter password">
-            <button type="button" class="eye-btn" id="eyeBtn">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            </button>
+
+        <div class="showcase-copy">
+          <div class="showcase-eyebrow"><span></span> DATA LABELING OPERATIONS CENTER</div>
+          <h1>Clarity in every task.<br><em>Quality in every detail.</em></h1>
+          <p>Your central workspace for operational visibility, team performance, and quality intelligence.</p>
+        </div>
+
+        <div class="showcase-feature-grid">
+          <div class="showcase-feature"><span class="feature-icon">⌁</span><div><b>Operational Insights</b><small>See the full picture</small></div></div>
+          <div class="showcase-feature"><span class="feature-icon">◈</span><div><b>Quality First</b><small>Make every detail count</small></div></div>
+          <div class="showcase-feature"><span class="feature-icon">↗</span><div><b>Team Performance</b><small>Move forward together</small></div></div>
+        </div>
+
+        <div class="showcase-bottom">
+          <div class="system-status" id="loginNetStatus"><span class="status-pulse" id="loginNetDot"></span><span id="loginNetLabel">System online</span></div>
+          <span class="showcase-caption">A smarter view of operations.</span>
+        </div>
+      </section>
+
+      <section class="login-panel">
+        <div class="login-panel-top">
+          <div class="mobile-brand-mark">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M10 46V18l14 17 8-10 8 10 14-17v28" fill="none" stroke="#14B8A6" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
+          <span class="secure-label"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2 16 4v5c0 4-2.5 7-6 9-3.5-2-6-5-6-9V4z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m7 10 2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> SECURE WORKSPACE</span>
         </div>
-      <div id="loginErr" style="background: var(--danger-bg); color: var(--danger-text); padding: 10px; border-radius: 8px; font-size: 13px; margin-bottom: 10px; display: none; text-align: center;"></div>
-      <button class="login-btn" id="loginBtn" onclick="doLogin()">Sign In</button>
-      <button type="button" id="demoBtn" onclick="startDemo()" style="width:100%;margin-top:10px;padding:12px;border-radius:10px;border:1.5px dashed #1c4587;background:transparent;color:#1c4587;font-weight:800;font-size:14px;cursor:pointer">Try the demo — sample data</button>
-        <div style="text-align:center;margin-top:14px">
-  <span style="font-size:13px;color:var(--neutral-text)">Don't have an account?</span>
-  <button onclick="showRegister()" style="background:none;border:none;color:#1c4587;
-    font-size:13px;font-weight:700;cursor:pointer;text-decoration:underline;margin-left:4px">
-    Request Access
-  </button>
-</div>
-      </div>
+        <div class="login-heading">
+          <div class="login-kicker">WELCOME BACK</div>
+          <h2>Sign in to METI</h2>
+          <p>Enter your credentials to continue to your workspace.</p>
+        </div>
+
+        <div id="loginForm">
+          <div class="inp-wrap login-field">
+            <label for="lEmail">Name or Email</label>
+            <div class="login-input-shell">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+              <input type="text" id="lEmail" autocomplete="username" placeholder="Enter your name or work email">
+            </div>
+          </div>
+          <div class="inp-wrap login-field">
+            <label for="lPass">Password</label>
+            <div class="pwd-wrap login-input-shell">
+              <svg class="field-leading-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+              <input type="password" id="lPass" autocomplete="current-password" placeholder="Enter your password">
+              <button type="button" class="eye-btn" id="eyeBtn" aria-label="Show password">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+          <div id="loginErr" class="login-err" style="display:none"></div>
+          <button class="login-btn" id="loginBtn" onclick="doLogin()"><span>Sign In</span><span class="login-btn-arrow">→</span></button>
+          <div class="login-divider"><span>OR</span></div>
+          <button type="button" id="demoBtn" class="demo-login-btn" onclick="startDemo()"><span class="demo-icon">◉</span> Explore demo with sample data</button>
+          <div class="login-register-line"><span>Don't have an account?</span><button type="button" onclick="showRegister()">Request Access</button></div>
+        </div>
+        <div class="login-panel-footer"><span>METI Operations Platform</span><span>Secure access · Authorized users only</span></div>
+      </section>
     </div>
+    <div class="login-copyright">© METI · DATA LABELING OPERATIONS</div>
   </div>
 </div>
 
@@ -1600,13 +1713,13 @@ function doLogin() {
         return;
     }
 
-    btn.textContent = '...';
+    btn.innerHTML = '<span>Signing in...</span>';
     btn.disabled = true;
     if(errEl) errEl.style.display = 'none';
 
     google.script.run
         .withSuccessHandler(function(res) {
-            btn.textContent = 'Sign In';
+            btn.innerHTML = '<span>Sign In</span><span class="login-btn-arrow">→</span>';
             btn.disabled = false;
 
             if (res && res.ok) {
@@ -1635,7 +1748,7 @@ if (res.kicked) {
             }
         })
         .withFailureHandler(function(err) {
-            btn.textContent = 'Sign In';
+            btn.innerHTML = '<span>Sign In</span><span class="login-btn-arrow">→</span>';
             btn.disabled = false;
             showLoginErr('Connection failed');
         })
@@ -3862,7 +3975,7 @@ if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
     return showRegErr('Please enter a valid email address');
 if (!pass || pass.length < 4)
     return showRegErr('Password must be at least 4 characters');
-  btn.textContent = '...';
+  btn.innerHTML = '<span>Signing in...</span>';
   btn.disabled    = true;
 
   google.script.run
@@ -3933,7 +4046,7 @@ function confirmApprove() {
   var errEl = gid('approveErr');
   var btn   = document.querySelector('#approveBd .btn-save');
   if (errEl) errEl.style.display = 'none';
-  if (btn)  { btn.textContent = '...'; btn.disabled = true; }
+  if (btn)  { btn.innerHTML = '<span>Signing in...</span>'; btn.disabled = true; }
 
   google.script.run
     .withSuccessHandler(function(r) {
